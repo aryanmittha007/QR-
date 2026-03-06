@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI in Multidisciplinary Engineering</title>
+  <meta name="description" content="Artificial Intelligence in Multidisciplinary Engineering — DIPEX 2026" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0d0d14;
+      color: #e8eaf6;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ─── GRID BACKGROUND ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(139, 92, 246, .07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 92, 246, .07) 1px, transparent 1px);
+      background-size: 50px 50px;
+      pointer-events: none;
+    }
+
+    /* ─── FLOATING SHAPES ─── */
+    .floaters {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+
+    .b1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(139, 92, 246, .18), transparent 70%);
+      top: -100px;
+      left: -100px;
+      animation-duration: 14s;
+    }
+
+    .b2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(59, 130, 246, .15), transparent 70%);
+      top: 30%;
+      right: -80px;
+      animation-duration: 10s;
+      animation-delay: -4s;
+    }
+
+    .b3 {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(236, 72, 153, .12), transparent 70%);
+      bottom: -80px;
+      left: 30%;
+      animation-duration: 16s;
+      animation-delay: -8s;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate(0, 0);
+      }
+
+      to {
+        transform: translate(30px, 40px);
+      }
+    }
+
+    /* floating icons */
+    .icon-float {
+      position: absolute;
+      font-size: 1.4rem;
+      opacity: .15;
+      animation: floatUp 8s ease-in-out infinite;
+    }
+
+    @keyframes floatUp {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0);
+      }
+
+      50% {
+        transform: translateY(-20px) rotate(5deg);
+      }
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1.5rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(139, 92, 246, .15);
+      border: 1px solid rgba(139, 92, 246, .4);
+      border-radius: 999px;
+      padding: .4rem 1.2rem;
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .1em;
+      color: #c4b5fd;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .chip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #a78bfa;
+      box-shadow: 0 0 8px #a78bfa;
+      animation: blink 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes blink {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: .3;
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #fff 0%, #c4b5fd 50%, #93c5fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .hero-sub {
+      margin-top: 1rem;
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: #a78bfa;
+      font-weight: 500;
+      letter-spacing: .05em;
+    }
+
+    .hero-desc {
+      margin-top: 1.5rem;
+      max-width: 700px;
+      line-height: 1.9;
+      font-size: clamp(.88rem, 2vw, 1rem);
+      color: #94a3b8;
+      font-weight: 300;
+    }
+
+    /* brain animation */
+    .brain-wrap {
+      margin-bottom: 2.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .brain-ring {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 1px solid rgba(167, 139, 250, .3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      animation: spin 20s linear infinite;
+    }
+
+    .brain-ring::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 1px dashed rgba(139, 92, 246, .2);
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .brain-inner {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(139, 92, 246, .12);
+      border: 1px solid rgba(139, 92, 246, .3);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      animation: spin 20s linear infinite reverse;
+    }
+
+    .orbit-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #a78bfa;
+      box-shadow: 0 0 12px #a78bfa;
+    }
+
+    .orbit-dot:nth-child(2) {
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .orbit-dot:nth-child(3) {
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background: #60a5fa;
+      box-shadow: 0 0 12px #60a5fa;
+    }
+
+    .orbit-dot:nth-child(4) {
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #34d399;
+      box-shadow: 0 0 12px #34d399;
+    }
+
+    /* scroll cue */
+    .scroll-cue {
+      margin-top: 3rem;
+      font-size: .78rem;
+      color: #475569;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .cue-arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 2px solid #7c3aed;
+      border-bottom: 2px solid #7c3aed;
+      transform: rotate(45deg);
+      animation: arrowBounce .7s ease-in-out infinite alternate;
+    }
+
+    @keyframes arrowBounce {
+      from {
+        transform: rotate(45deg) translate(-3px, -3px);
+      }
+
+      to {
+        transform: rotate(45deg) translate(3px, 3px);
+      }
+    }
+
+    /* ─── GLASS CARD ─── */
+    .glass {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 24px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+    }
+
+    .glass:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 60px rgba(139, 92, 246, .15);
+      border-color: rgba(167, 139, 250, .3);
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      position: relative;
+      z-index: 10;
+      padding: 5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .sec-label {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #7c3aed;
+      margin-bottom: .5rem;
+    }
+
+    .sec-title {
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+    }
+
+    .sec-title span.icon {
+      font-size: 1.6rem;
+    }
+
+    .sec-desc {
+      color: #94a3b8;
+      line-height: 1.9;
+      font-size: clamp(.88rem, 2vw, 1rem);
+      max-width: 780px;
+      font-weight: 300;
+    }
+
+    /* divider */
+    .wave-divider {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .wave-divider svg {
+      display: block;
+    }
+
+    /* ─── TECH PILLS ─── */
+    .pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: 2rem;
+    }
+
+    .pill {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .6rem 1.3rem;
+      background: rgba(139, 92, 246, .1);
+      border: 1px solid rgba(139, 92, 246, .25);
+      border-radius: 999px;
+      font-size: .88rem;
+      color: #c4b5fd;
+      font-weight: 500;
+      transition: all .25s;
+      cursor: default;
+    }
+
+    .pill:hover {
+      background: rgba(139, 92, 246, .2);
+      transform: scale(1.04);
+    }
+
+    .pill-icon {
+      font-size: 1rem;
+    }
+
+    /* ─── BENEFIT CARDS ─── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .card-inner {
+      padding: 1.8rem 1.5rem;
+    }
+
+    .card-ico {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-ico.purple {
+      background: rgba(139, 92, 246, .15);
+      border: 1px solid rgba(139, 92, 246, .25);
+    }
+
+    .card-ico.blue {
+      background: rgba(59, 130, 246, .12);
+      border: 1px solid rgba(59, 130, 246, .25);
+    }
+
+    .card-ico.green {
+      background: rgba(52, 211, 153, .12);
+      border: 1px solid rgba(52, 211, 153, .25);
+    }
+
+    .card-ico.pink {
+      background: rgba(236, 72, 153, .12);
+      border: 1px solid rgba(236, 72, 153, .25);
+    }
+
+    .card-ico.amber {
+      background: rgba(251, 191, 36, .1);
+      border: 1px solid rgba(251, 191, 36, .2);
+    }
+
+    .card-ico.cyan {
+      background: rgba(34, 211, 238, .1);
+      border: 1px solid rgba(34, 211, 238, .2);
+    }
+
+    .card-inner h3 {
+      font-size: .95rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-bottom: .4rem;
+    }
+
+    .card-inner p {
+      font-size: .83rem;
+      color: #94a3b8;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ─── TABS ─── */
+    .tab-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin: 2rem 0 1.5rem;
+    }
+
+    .tab-btn {
+      padding: .6rem 1.3rem;
+      font-size: .85rem;
+      font-weight: 500;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .04);
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all .25s;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .tab-btn.active,
+    .tab-btn:hover {
+      background: rgba(139, 92, 246, .2);
+      border-color: rgba(167, 139, 250, .5);
+      color: #c4b5fd;
+    }
+
+    .tab-panel {
+      display: none;
+      animation: fadeSlide .35s ease;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .app-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: .8rem;
+      margin-top: 1rem;
+    }
+
+    .app-item {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      padding: .85rem 1.1rem;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 12px;
+      font-size: .88rem;
+      color: #cbd5e1;
+      font-weight: 400;
+      transition: all .25s;
+    }
+
+    .app-item:hover {
+      background: rgba(139, 92, 246, .12);
+      border-color: rgba(167, 139, 250, .3);
+      color: #e2e8f0;
+    }
+
+    .app-item .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #a78bfa;
+      flex-shrink: 0;
+      box-shadow: 0 0 8px #a78bfa;
+    }
+
+    /* ─── PROS CONS ─── */
+    .duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    @media(max-width:580px) {
+      .duo {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .duo-card {
+      padding: 1.8rem;
+    }
+
+    .duo-head {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: 1.2rem;
+      font-size: .95rem;
+      font-weight: 600;
+    }
+
+    .duo-list {
+      list-style: none;
+    }
+
+    .duo-list li {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      padding: .6rem 0;
+      font-size: .88rem;
+      color: #94a3b8;
+      border-bottom: 1px solid rgba(255, 255, 255, .05);
+    }
+
+    .duo-list li:last-child {
+      border-bottom: none;
+    }
+
+    .tick {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .7rem;
+      flex-shrink: 0;
+    }
+
+    .tick.g {
+      background: rgba(52, 211, 153, .15);
+      color: #34d399;
+    }
+
+    .tick.r {
+      background: rgba(248, 113, 113, .12);
+      color: #f87171;
+    }
+
+    /* ─── FUTURE ─── */
+    .future-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .future-card {
+      padding: 1.8rem 1rem;
+      text-align: center;
+      transition: all .3s;
+    }
+
+    .future-card:hover {
+      transform: scale(1.06);
+      box-shadow: 0 20px 50px rgba(139, 92, 246, .2);
+    }
+
+    .future-ico {
+      font-size: 2.4rem;
+      margin-bottom: .8rem;
+    }
+
+    .future-card h3 {
+      font-size: .82rem;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+
+    /* ─── FINAL ─── */
+    .final {
+      position: relative;
+      z-index: 10;
+      padding: 5rem 1.5rem;
+      text-align: center;
+    }
+
+    .final-box {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3.5rem 2.5rem;
+    }
+
+    .final-box h2 {
+      font-size: clamp(1.3rem, 3.5vw, 2rem);
+      font-weight: 700;
+      color: #f1f5f9;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .final-box p {
+      color: #94a3b8;
+      line-height: 1.9;
+      font-size: .95rem;
+      font-weight: 300;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .7rem;
+      margin-top: 2rem;
+    }
+
+    .tag {
+      padding: .5rem 1.2rem;
+      font-size: .8rem;
+      font-weight: 500;
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+    }
+
+    .tag.v {
+      background: rgba(139, 92, 246, .15);
+      border: 1px solid rgba(139, 92, 246, .3);
+      color: #c4b5fd;
+    }
+
+    .tag.b {
+      background: rgba(59, 130, 246, .12);
+      border: 1px solid rgba(59, 130, 246, .3);
+      color: #93c5fd;
+    }
+
+    .tag.g {
+      background: rgba(52, 211, 153, .1);
+      border: 1px solid rgba(52, 211, 153, .25);
+      color: #6ee7b7;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: .78rem;
+      color: #334155;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    /* ─── REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── PROGRESS ─── */
+    .prog-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    @media(max-width:580px) {
+      .prog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .prog-item {}
+
+    .prog-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: .5rem;
+      font-size: .83rem;
+      color: #94a3b8;
+    }
+
+    .prog-bar {
+      height: 5px;
+      background: rgba(255, 255, 255, .07);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .prog-fill {
+      height: 100%;
+      border-radius: 4px;
+      width: 0;
+      transition: width 1.4s cubic-bezier(.25, .8, .25, 1);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Blobs -->
+  <div class="floaters">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+    <span class="icon-float" style="top:15%;left:8%;animation-delay:0s">⚙️</span>
+    <span class="icon-float" style="top:25%;right:10%;animation-delay:-2s">🤖</span>
+    <span class="icon-float" style="top:60%;left:5%;animation-delay:-4s">💡</span>
+    <span class="icon-float" style="top:70%;right:8%;animation-delay:-6s">🔬</span>
+    <span class="icon-float" style="top:40%;left:50%;animation-delay:-3s">🧠</span>
+  </div>
+
+  <!-- ══ HERO ══ -->
+  <div class="hero">
+    <div class="brain-wrap">
+      <div class="brain-ring">
+        <div class="orbit-dot"></div>
+        <div class="orbit-dot"></div>
+        <div class="orbit-dot"></div>
+        <div class="brain-inner">🧠</div>
+      </div>
+    </div>
+    <div class="chip"><span class="chip-dot"></span> DIPEX 2026 &nbsp;•&nbsp; AI Showcase</div>
+    <h1>Artificial Intelligence in<br />Multidisciplinary Engineering</h1>
+    <div class="hero-sub">Welcome to the Future of Engineering</div>
+    <p class="hero-desc">
+      AI is transforming how engineers design, build, and manage systems — bridging
+      <strong style="color:#c4b5fd">Computer, Mechanical, Electrical, Civil</strong> &amp;
+      <strong style="color:#93c5fd">Biomedical Engineering</strong> for smarter, faster solutions.
+    </p>
+    <div class="scroll-cue"><span>Explore</span>
+      <div class="cue-arrow"></div>
+    </div>
+  </div>
+
+  <!-- ══ WHAT IS AI ══ -->
+  <section>
+    <div class="container reveal">
+      <div class="sec-label">01 — Foundation</div>
+      <h2 class="sec-title"><span class="icon">🧠</span> What is Artificial Intelligence?</h2>
+      <p class="sec-desc">AI refers to computer systems that perform tasks normally requiring human intelligence —
+        learning, reasoning, problem-solving, and decision-making. These systems learn from data and continuously
+        improve.</p>
+      <div class="pill-grid">
+        <div class="pill"><span class="pill-icon">📈</span> Machine Learning</div>
+        <div class="pill"><span class="pill-icon">🔬</span> Deep Learning</div>
+        <div class="pill"><span class="pill-icon">💬</span> Natural Language Processing</div>
+        <div class="pill"><span class="pill-icon">👁️</span> Computer Vision</div>
+        <div class="pill"><span class="pill-icon">🤖</span> Robotics</div>
+        <div class="pill"><span class="pill-icon">📊</span> Data Analytics</div>
+      </div>
+
+      <div class="prog-grid" id="progBars" style="margin-top:2.5rem;">
+        <div class="prog-item">
+          <div class="prog-top"><span>Automation Capability</span><span style="color:#a78bfa">92%</span></div>
+          <div class="prog-bar">
+            <div class="prog-fill" style="background:linear-gradient(90deg,#7c3aed,#a78bfa)" data-w="92"></div>
+          </div>
+        </div>
+        <div class="prog-item">
+          <div class="prog-top"><span>Prediction Accuracy</span><span style="color:#60a5fa">88%</span></div>
+          <div class="prog-bar">
+            <div class="prog-fill" style="background:linear-gradient(90deg,#2563eb,#60a5fa)" data-w="88"></div>
+          </div>
+        </div>
+        <div class="prog-item">
+          <div class="prog-top"><span>Cost Reduction</span><span style="color:#34d399">75%</span></div>
+          <div class="prog-bar">
+            <div class="prog-fill" style="background:linear-gradient(90deg,#059669,#34d399)" data-w="75"></div>
+          </div>
+        </div>
+        <div class="prog-item">
+          <div class="prog-top"><span>Engineering Efficiency</span><span style="color:#f472b6">85%</span></div>
+          <div class="prog-bar">
+            <div class="prog-fill" style="background:linear-gradient(90deg,#be185d,#f472b6)" data-w="85"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WHY AI ══ -->
+  <section style="background:rgba(139,92,246,.03);">
+    <div class="container reveal">
+      <div class="sec-label">02 — Importance</div>
+      <h2 class="sec-title"><span class="icon">⚡</span> Why AI in Multidisciplinary Engineering?</h2>
+      <p class="sec-desc">AI acts as a universal bridge — letting engineers from different domains collaborate and build
+        solutions no single discipline could achieve alone.</p>
+      <div class="card-grid">
+        <div class="glass">
+          <div class="card-inner">
+            <div class="card-ico purple">⚡</div>
+            <h3>Faster Problem Solving</h3>
+            <p>AI compresses months of analysis into hours using powerful computation.</p>
+          </div>
+        </div>
+        <div class="glass">
+          <div class="card-inner">
+            <div class="card-ico blue">⚙️</div>
+            <h3>Task Automation</h3>
+            <p>Automates repetitive, complex, and hazardous processes with precision.</p>
+          </div>
+        </div>
+        <div class="glass">
+          <div class="card-inner">
+            <div class="card-ico green">📈</div>
+            <h3>Accurate Data Analysis</h3>
+            <p>Processes vast engineering datasets with exceptional accuracy.</p>
+          </div>
+        </div>
+        <div class="glass">
+          <div class="card-inner">
+            <div class="card-ico pink">🏗️</div>
+            <h3>Better Designs</h3>
+            <p>Generative AI proposes optimised, novel engineering designs instantly.</p>
+          </div>
+        </div>
+        <div class="glass">
+          <div class="card-inner">
+            <div class="card-ico amber">🧩</div>
+            <h3>Smart Decisions</h3>
+            <p>Real-time intelligent decision support across complex systems.</p>
+          </div>
+        </div>
+        <div class="glass">
+          <div class="card-inner">
+            <div class="card-ico cyan">🌐</div>
+            <h3>Cross-Domain Work</h3>
+            <p>Bridges gaps between engineering disciplines for collaborative innovation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ APPLICATIONS ══ -->
+  <section>
+    <div class="container reveal">
+      <div class="sec-label">03 — Applications</div>
+      <h2 class="sec-title"><span class="icon">🚀</span> AI Applications in Engineering Fields</h2>
+      <p class="sec-desc">Each engineering domain benefits uniquely from AI integration. Select a field below to explore
+        real-world applications.</p>
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('mech',this)">⚙️ Mechanical</button>
+        <button class="tab-btn" onclick="switchTab('civil',this)">🏙️ Civil</button>
+        <button class="tab-btn" onclick="switchTab('elec',this)">⚡ Electrical</button>
+        <button class="tab-btn" onclick="switchTab('bio',this)">🧬 Biomedical</button>
+        <button class="tab-btn" onclick="switchTab('comp',this)">💻 Computer</button>
+      </div>
+
+      <div id="mech" class="tab-panel active glass" style="padding:1.5rem;">
+        <p style="font-size:.88rem;color:#94a3b8;margin-bottom:1rem;">AI revolutionises manufacturing through
+          intelligent automation and predictive systems.</p>
+        <div class="app-list">
+          <div class="app-item">
+            <div class="dot"></div>Industrial Robotics
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Predictive Maintenance
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Automated Production Lines
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Smart Manufacturing
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Digital Twin Simulation
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>AI-Driven CAD Design
+          </div>
+        </div>
+      </div>
+      <div id="civil" class="tab-panel glass" style="padding:1.5rem;">
+        <p style="font-size:.88rem;color:#94a3b8;margin-bottom:1rem;">AI enhances infrastructure planning, safety
+          monitoring, and urban development at scale.</p>
+        <div class="app-list">
+          <div class="app-item">
+            <div class="dot"></div>Smart City Planning
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Traffic Control Systems
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Structural Health Monitoring
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Construction Automation
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Flood Prediction Models
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>BIM-AI Integration
+          </div>
+        </div>
+      </div>
+      <div id="elec" class="tab-panel glass" style="padding:1.5rem;">
+        <p style="font-size:.88rem;color:#94a3b8;margin-bottom:1rem;">AI optimises power systems, energy distribution,
+          and fault detection at scale.</p>
+        <div class="app-list">
+          <div class="app-item">
+            <div class="dot"></div>Smart Power Grids
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Energy Consumption Prediction
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Renewable Energy Optimisation
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Fault Detection Networks
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>AI Circuit Design
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Smart Metering Systems
+          </div>
+        </div>
+      </div>
+      <div id="bio" class="tab-panel glass" style="padding:1.5rem;">
+        <p style="font-size:.88rem;color:#94a3b8;margin-bottom:1rem;">AI powers breakthroughs in diagnostics, drug
+          discovery, and smart prosthetics.</p>
+        <div class="app-list">
+          <div class="app-item">
+            <div class="dot"></div>Medical Image Analysis
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Drug Discovery
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>AI-Assisted Surgery
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Smart Prosthetics
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Genomic Data Analysis
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Remote Patient Monitoring
+          </div>
+        </div>
+      </div>
+      <div id="comp" class="tab-panel glass" style="padding:1.5rem;">
+        <p style="font-size:.88rem;color:#94a3b8;margin-bottom:1rem;">AI is native to computer engineering — powering
+          software, hardware, and networks.</p>
+        <div class="app-list">
+          <div class="app-item">
+            <div class="dot"></div>AI Chip Design
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Autonomous Software Testing
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Cybersecurity AI
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>LLM Development
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Edge AI Deployment
+          </div>
+          <div class="app-item">
+            <div class="dot"></div>Neural Architecture Search
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PROS & CONS ══ -->
+  <section style="background:rgba(59,130,246,.03);">
+    <div class="container reveal">
+      <div class="sec-label">04 — Analysis</div>
+      <h2 class="sec-title"><span class="icon">⚖️</span> Advantages &amp; Challenges</h2>
+      <div class="duo">
+        <div class="glass duo-card">
+          <div class="duo-head" style="color:#34d399;">✅ Advantages</div>
+          <ul class="duo-list">
+            <li><span class="tick g">✓</span> Improves efficiency &amp; productivity</li>
+            <li><span class="tick g">✓</span> Reduces human errors</li>
+            <li><span class="tick g">✓</span> Enables complex task automation</li>
+            <li><span class="tick g">✓</span> Provides data-driven insights</li>
+            <li><span class="tick g">✓</span> Creates smart, sustainable systems</li>
+            <li><span class="tick g">✓</span> 24/7 operational capability</li>
+          </ul>
+        </div>
+        <div class="glass duo-card">
+          <div class="duo-head" style="color:#f87171;">⚠️ Challenges</div>
+          <ul class="duo-list">
+            <li><span class="tick r">✕</span> High implementation cost</li>
+            <li><span class="tick r">✕</span> Data privacy concerns</li>
+            <li><span class="tick r">✕</span> Requires large datasets</li>
+            <li><span class="tick r">✕</span> Need for skilled professionals</li>
+            <li><span class="tick r">✕</span> Risk of algorithmic bias</li>
+            <li><span class="tick r">✕</span> Interpretability challenges</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FUTURE ══ -->
+  <section>
+    <div class="container reveal">
+      <div class="sec-label">05 — Vision</div>
+      <h2 class="sec-title"><span class="icon">🌏</span> The Future of AI in Engineering</h2>
+      <p class="sec-desc">The next generation of engineering will be deeply intertwined with AI — creating adaptive
+        systems that solve humanity's greatest challenges.</p>
+      <div class="future-grid">
+        <div class="glass future-card">
+          <div class="future-ico">🏙️</div>
+          <h3>Smart Cities</h3>
+        </div>
+        <div class="glass future-card">
+          <div class="future-ico">🚗</div>
+          <h3>Autonomous Vehicles</h3>
+        </div>
+        <div class="glass future-card">
+          <div class="future-ico">🏥</div>
+          <h3>Intelligent Healthcare</h3>
+        </div>
+        <div class="glass future-card">
+          <div class="future-ico">🌱</div>
+          <h3>Sustainable Energy</h3>
+        </div>
+        <div class="glass future-card">
+          <div class="future-ico">🤖</div>
+          <h3>Advanced Robotics</h3>
+        </div>
+        <div class="glass future-card">
+          <div class="future-ico">🛸</div>
+          <h3>Space Exploration</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FINAL ══ -->
+  <div class="final">
+    <div class="glass final-box reveal">
+      <div style="font-size:3rem;margin-bottom:1rem;">🚀</div>
+      <h2>AI Will Shape the Next Generation of Engineering Innovations</h2>
+      <p>Artificial Intelligence is not just a tool — it is the foundation upon which tomorrow's engineers will build
+        smarter, safer, and more sustainable systems for a better world.</p>
+      <div class="tags">
+        <div class="tag v">Machine Learning</div>
+        <div class="tag b">Deep Learning</div>
+        <div class="tag g">Robotics</div>
+        <div class="tag v">NLP</div>
+        <div class="tag b">Computer Vision</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>&copy; 2026 &nbsp;·&nbsp; AI in Multidisciplinary Engineering &nbsp;·&nbsp; DIPEX 2026</footer>
+
+  <script>
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const ro = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); }); }, { threshold: .1 });
+    reveals.forEach(r => ro.observe(r));
+
+    // Progress bars
+    const pb = document.getElementById('progBars');
+    const po = new IntersectionObserver(es => {
+      es.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.prog-fill').forEach(b => b.style.width = b.dataset.w + '%');
+          po.unobserve(e.target);
+        }
+      });
+    }, { threshold: .3 });
+    if (pb) po.observe(pb);
+
+    // Tabs
+    function switchTab(id, btn) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+</body>
+
+</html>
